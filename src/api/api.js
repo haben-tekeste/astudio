@@ -1,5 +1,5 @@
 import axios from "axios";
 
 export default axios.create({
-  baseURL: "https://dummyjson.com/docs",
+  baseURL: "https://dummyjson.com",
 });

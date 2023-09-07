@@ -5,15 +5,19 @@ import { Routes, Route } from 'react-router-dom'
 import Users from './pages/Users'
 import Products from './pages/Products'
 
+// components
+import Nav from './components/Nav'
+
 
 function App() {
   
 
   return (
     <>
+      {/* <Nav /> */}
       <Routes>
-        <Route path='/home/users' element={<Users />}/>
-        <Route path='/home/products' element={<Products />}/>
+        <Route path='/users' element={<Users />}/>
+        <Route path='/products' element={<Products />}/>
       </Routes>
     </>
   )
