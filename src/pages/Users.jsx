@@ -7,6 +7,7 @@ import { Context } from "../context/usersContext"
 // components
 import Filters from "../components/Filters"
 import Table from "../components/Table"
+import Pagination from "../components/Pagination"
 
 const columnHeaders = [
   {
@@ -49,18 +50,27 @@ const columnHeaders = [
 
 export default function Users() {
   //
-  const {state, fetchUsers} = useContext(Context)
+  const {state, fetchUsers, updateSearchTerm, submitSearch} = useContext(Context)
 
   // 
   useEffect(() => {
     fetchUsers()
   },[])
 
+  // 
+  const handleEntriesChange = (nbr) => {
+    fetchUsers(nbr)
+  }
+
+  const handleSearch = () => {  
+    submitSearch(state.data?.users, state.searchTerm)
+  }
 
   return (
     <div>
-      <Filters />
-      <Table data={state?.data?.users} columnHeaders={columnHeaders} />
+      <Filters handleEntries = {handleEntriesChange} handleSearch={handleSearch} updateSearchTerm={updateSearchTerm} onSubmitSearch={handleSearch}/>
+      <Table data={state.data?.users} columnHeaders={columnHeaders} searchResult = {state.search} />
+      <Pagination />
     </div>
   )
 }

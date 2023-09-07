@@ -52,10 +52,18 @@ export default function Products() {
     fetchProducts()
   },[])
 
+  //
+  const handleEntriesChange = (nbr) => {
+    fetchProducts(nbr)
+  }
+
+  const handleSearch = (term) => {
+
+  }
 
   return (
     <div>
-      <Filters />
+      <Filters handleEntries={handleEntriesChange} handleSearch={handleSearch}/>
       <Table data={state?.data?.products} columnHeaders={columnHeaders} />
     </div>
   )

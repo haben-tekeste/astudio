@@ -25,10 +25,10 @@ const reducer = (state, action) => {
 
 
 const fetchProducts = (dispatch) => {
-return async () => {
+return async (nbr=5) => {
   try {
     
-    const { data } = await dummyApi.get("/products");
+    const { data } = await dummyApi.get(`/products?limit=${nbr}`);
     dispatch({
       type: "fetch_products",
       payload: data,

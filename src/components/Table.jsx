@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from 'uuid';
 
 export default function Table ({columnHeaders, data}) { 
-    console.log(data);
+    // console.log(data);
     return (
         <div className="mt-12">
             <table className="table-fixed w-full text-sm border-spacing-2">
@@ -22,7 +22,7 @@ export default function Table ({columnHeaders, data}) {
                     {
                         
                         data?.map((row, i) => (
-                            <tr key={i} >
+                            <tr key={i} className={`${i == 0 && 'bg-[#ebebeb]'}`}>
 
                                { columnHeaders.map(col => {
                                    return <td key={uuidv4()} className="text-sm text-center border-2 font-thin text-gray-500 p-2">
