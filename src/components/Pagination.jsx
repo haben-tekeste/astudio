@@ -2,23 +2,22 @@
 import { ArrowLeftIcon,ArrowRightIcon } from "@heroicons/react/24/outline"
 import { useState } from "react"
 
+//
+import ReactPaginate from "react-paginate"
 
-export default function Pagination() {
+
+export default function Pagination({onPageChange, pageCount}) {
     const [active, setActive] = useState(1)
     return (
-        <ul className="w-[30%] flex flex-row justify-between m-auto items-center mt-6">
-            <ArrowLeftIcon className="h-5"/>
-            <li className="mb-3">1</li>
-            <li>2</li>
-            <li>3</li>
-            <li>4</li>
-            <li>5</li>
-            <li>6</li>
-            <li>7</li>
-            <li>8</li>
-            <li>9</li>
-            <li>10</li>
-            <ArrowRightIcon className="h-5"/>
-        </ul>
+      <ReactPaginate
+        breakLabel="..."
+        nextLabel={<ArrowRightIcon className="h-5"/>}
+        onPageChange={onPageChange}
+        pageRangeDisplayed={5}
+        pageCount={pageCount}
+        previousLabel={<ArrowLeftIcon className="h-5"/>}
+        renderOnZeroPageCount={null}
+        className="w-[30%] flex flex-row justify-between m-auto items-center mt-6"
+      />
     )
 }

@@ -1,5 +1,6 @@
 import './App.css'
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, useLocation } from 'react-router-dom'
+
 
 // pages
 import Users from './pages/Users'
@@ -10,13 +11,12 @@ import Nav from './components/Nav'
 
 
 function App() {
-  
-
+  const {pathname} = useLocation()
   return (
     <>
-      {/* <Nav /> */}
+      <Nav pathname={pathname}/>
       <Routes>
-        <Route path='/users' element={<Users />}/>
+        <Route path='/users' element={<Users />} />
         <Route path='/products' element={<Products />}/>
       </Routes>
     </>

@@ -1,5 +1,4 @@
-import { useContext, useEffect } from "react"
-
+import { useContext, useEffect,useState } from "react"
 
 // user context
 import { Context } from "../context/usersContext"
@@ -45,32 +44,57 @@ const columnHeaders = [
   {
     "header":"EYECOLOR",
     "accessorKey":"eyeColor"
+  },
+  {
+    "header":"PHONE",
+    "accessorKey":"phone"
+  },
+  {
+    "header":"HEIGHT",
+    "accessorKey":"height"
+  },
+  {
+    "header":"WEIGHT",
+    "accessorKey":"weight"
   }
 ]
 
+const categories = ['Name', 'Email','BirthDate','Gender']
+
 export default function Users() {
   //
-  const {state, fetchUsers, updateSearchTerm, submitSearch} = useContext(Context)
+  const {state, fetchUsers, updateSearchTerm, submitSearch, setEntries} = useContext(Context)
 
   // 
   useEffect(() => {
-    fetchUsers()
-  },[])
+    fetchUsers(state.entries)
+  },[state.entries])
 
   // 
   const handleEntriesChange = (nbr) => {
-    fetchUsers(nbr)
+    setEntries(nbr)
   }
 
-  const handleSearch = () => {  
+  const handleSearch = () => {
+    if (!state.searchTerm) return fetchUsers(state.entries)
     submitSearch(state.data?.users, state.searchTerm)
+  }
+  
+  
+  const pageCount = Math.ceil(state.data?.total / state.entries);
+
+
+  const onPageChange = (e) => {
+    const newOffset = (e.selected * state.entries) % state.data?.total;
+    // const skip;
+    fetchUsers(state.entries, newOffset)
   }
 
   return (
-    <div>
-      <Filters handleEntries = {handleEntriesChange} handleSearch={handleSearch} updateSearchTerm={updateSearchTerm} onSubmitSearch={handleSearch}/>
+    <div className="mx-4">
+      <Filters categories={categories} handleEntries = {handleEntriesChange} updateSearchTerm={updateSearchTerm} onSubmitSearch={handleSearch} />
       <Table data={state.data?.users} columnHeaders={columnHeaders} searchResult = {state.search} />
-      <Pagination />
+      <Pagination onPageChange={onPageChange} pageCount={pageCount}/>
     </div>
   )
 }

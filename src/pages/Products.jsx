@@ -7,6 +7,7 @@ import { Context } from "../context/productsContext"
 // components
 import Filters from "../components/Filters"
 import Table from "../components/Table"
+import Pagination from "../components/Pagination"
 
 const columnHeaders = [
   {
@@ -41,30 +42,44 @@ const columnHeaders = [
     "header":"CATEGORY",
     "accessorKey":"category"
   },
+  {
+    "header":"DISCOUNT %",
+    "accessorKey":"discountPercentage"
+  },
 ]
+
+const categories = ["Title","Brand","Category"]
 
 export default function Products() {
   //
-  const {state, fetchProducts} = useContext(Context)
+  const {state, fetchProducts, setEntries, submitSearch, updateSearchTerm} = useContext(Context)
 
   // 
   useEffect(() => {
-    fetchProducts()
-  },[])
+    fetchProducts(state.entries)
+  },[state.entries])
 
   //
   const handleEntriesChange = (nbr) => {
-    fetchProducts(nbr)
+    setEntries(nbr)
   }
 
-  const handleSearch = (term) => {
+  const handleSearch = () => {
+    submitSearch(state.data?.products, state.searchTerm)
+  }
 
+  
+  const pageCount = Math.ceil(state.data?.total / state.entries)
+  const onPageChange = (e) => {
+    const newOffset = (e.selected * state.entries) % state.data?.total;
+    fetchProducts(state.entries, newOffset)
   }
 
   return (
-    <div>
-      <Filters handleEntries={handleEntriesChange} handleSearch={handleSearch}/>
-      <Table data={state?.data?.products} columnHeaders={columnHeaders} />
+    <div className="mx-6">
+      <Filters categories={categories} updateSearchTerm={updateSearchTerm} handleEntries={handleEntriesChange} onSubmitSearch={handleSearch}/>
+      <Table data={state?.data?.products} columnHeaders={columnHeaders} searchResult = {state.search}/>
+      <Pagination onPageChange={onPageChange} pageCount={pageCount}/>
     </div>
   )
 }
