@@ -52,12 +52,19 @@ const fetchProducts = (
 ) => {
   return async (
     nbr = 5,
-    skip = 0
+    skip = 0,
+    cat=""
   ) => {
     try {
+      let url;
+      if (!cat){
+        url = `/products?limit=${nbr}&skip=${skip}`
+      }else{
+        url = `/products/category/${cat}?limit=${nbr}&skip=${skip}`
+      }
       const { data } =
         await dummyApi.get(
-          `/products?limit=${nbr}&skip=${skip}`
+         url
         )
       dispatch({
         type: 'fetch_products',

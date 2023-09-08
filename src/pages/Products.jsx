@@ -49,7 +49,7 @@ const columnHeaders = [
 ]
 
 const categories = ["Title","Brand","Category"]
-const Tabs = ['All', 'Laptop']
+const Tabs = ['All', 'Laptops']
 
 export default function Products() {
   //
@@ -77,7 +77,7 @@ export default function Products() {
   }
 
   const onChangeTab = (value) => {
-    console.log(value);
+    fetchProducts(state.entries, 0,value)
   }
 
   return (
