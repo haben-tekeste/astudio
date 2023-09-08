@@ -8,6 +8,8 @@ export default function Filters({
   updateSearchTerm,
   onSubmitSearch,
   categories,
+  tabs,
+  onChangeTab
 }) {
   const [open, setOpen] =
     useState(false)
@@ -94,6 +96,19 @@ export default function Filters({
           </div>
         )
       )}
+         { tabs.length != 0 && (<div
+            className="flex space-x-4 border-r-4 border-gray-300 px-4 pt-1"
+          >
+            <select className="outline-none w-50  px-4" onChange={(e) => onChangeTab(e.target.value)}>
+      {
+        tabs.map((tab,i) => (
+              <option value={tab === 'all' ? "" : tab.toLowerCase()} key={i}>
+                {tab}
+              </option>
+        ))
+      }
+            </select>
+          </div>)}
     </div>
   )
 }

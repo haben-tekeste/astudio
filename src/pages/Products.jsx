@@ -49,6 +49,7 @@ const columnHeaders = [
 ]
 
 const categories = ["Title","Brand","Category"]
+const Tabs = ['All', 'Laptop']
 
 export default function Products() {
   //
@@ -75,9 +76,13 @@ export default function Products() {
     fetchProducts(state.entries, newOffset)
   }
 
+  const onChangeTab = (value) => {
+    console.log(value);
+  }
+
   return (
     <div className="mx-6">
-      <Filters categories={categories} updateSearchTerm={updateSearchTerm} handleEntries={handleEntriesChange} onSubmitSearch={handleSearch}/>
+      <Filters onChangeTab={onChangeTab} tabs={Tabs} categories={categories} updateSearchTerm={updateSearchTerm} handleEntries={handleEntriesChange} onSubmitSearch={handleSearch}/>
       <Table data={state?.data?.products} columnHeaders={columnHeaders} searchResult = {state.search}/>
       <Pagination onPageChange={onPageChange} pageCount={pageCount}/>
     </div>

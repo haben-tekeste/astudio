@@ -8,3 +8,9 @@
     font-family: Neutra Text;
   }
 }
+
+@layer components{
+  .active{
+    @apply mb-3
+  }
+}

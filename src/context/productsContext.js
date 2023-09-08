@@ -139,7 +139,12 @@ export const {
     error: false,
     entries: 5,
     search:null,
-    searchTerm:''
+    searchTerm:'',
+    filter:{
+      title:"",
+      brand:"",
+      category:""
+    }
 
   }
 )

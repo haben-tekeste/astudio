@@ -92,7 +92,7 @@ export default function Users() {
 
   return (
     <div className="mx-4">
-      <Filters categories={categories} handleEntries = {handleEntriesChange} updateSearchTerm={updateSearchTerm} onSubmitSearch={handleSearch} />
+      <Filters tabs={[]} categories={categories} handleEntries = {handleEntriesChange} updateSearchTerm={updateSearchTerm} onSubmitSearch={handleSearch} />
       <Table data={state.data?.users} columnHeaders={columnHeaders} searchResult = {state.search} />
       <Pagination onPageChange={onPageChange} pageCount={pageCount}/>
     </div>

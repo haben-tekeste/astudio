@@ -18,6 +18,7 @@ export default function Pagination({onPageChange, pageCount}) {
         previousLabel={<ArrowLeftIcon className="h-5"/>}
         renderOnZeroPageCount={null}
         className="w-[30%] flex flex-row justify-between m-auto items-center mt-6"
+        activeClassName="active"
       />
     )
 }

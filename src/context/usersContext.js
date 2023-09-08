@@ -133,6 +133,12 @@ export const {
     search: null,
     error: false,
     searchTerm: '',
-    entries:5
+    entries:5,
+    filter:{
+      name:"",
+      email:"",
+      gender:"",
+      birthDate:""
+    }
   }
 )
